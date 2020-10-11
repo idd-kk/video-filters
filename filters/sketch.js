@@ -2,48 +2,74 @@ let videoFeed;
 let colorBtn;
 let cubeBtn;
 let picBtn;
+let snap;
 let saveBtn;
 let resetBtn;
+let c; 
 
 
 function setup() {
-    createCanvas(640, 480);
+    c = createCanvas(640, 480);
+    background(204);
     videoFeed = createCapture(VIDEO);
     // videoFeed.hide();
 
-    colorBtn = createButton('color filter');
-    colorBtn.position(120, 420);
+    colorBtn = createImg('/filters/img/color-palette.svg');
+    colorBtn.size(60, 50)
+    colorBtn.position(170, 415);
     colorBtn.mouseClicked(colorFilter); 
 
-    cubeBtn = createButton('cube filter');
-    cubeBtn.position(200, 420);
+    cubeBtn = createImg('/filters/img/contrast.svg');
+    cubeBtn.size(35, 35)
+    cubeBtn.position(240, 420);
     cubeBtn.mousePressed(cubeFilter);
 
-    picBtn = createButton('take photo');
-    picBtn.position(280, 420);
+    picBtn =  createImg('/filters/img/camera.svg');
+    picBtn.size(80, 60)
+    picBtn.position(280, 410);
     picBtn.mousePressed(takeSnap);
 
-    saveBtn = createButton('save');
+    saveBtn = createImg('/filters/img/floppy.svg');
+    saveBtn.size(40, 40)
     saveBtn.position(365, 420);
     saveBtn.mouseClicked(savePic); 
 
-    resetBtn = createButton('reset');
+    resetBtn = createImg('/filters/img/reset.svg');
+    resetBtn.size(40, 40)
     resetBtn.position(415, 420);
     resetBtn.mouseClicked(resetAll); 
+
+    resetAll();
 } 
     
 
 function draw() {
     // image(videoFeed, 0, 0);
-    colorFilter;
-    cubeFilter;
-    takeSnap;
-    resetAll;
+    // colorFilter;
+    // cubeFilter;
+    // takeSnap();
+   
+
+
+    // if (colorFilter.mousePressed == true) {
+    //     image(videoFeed, 0, 0); 
+    //     colorFilter();
+    // }
+    // else if (cubeFilter.mousePressed == true) {
+    //     image(videoFeed, 0, 0); 
+    //     cubeFilter();
+    // } 
+    // else {
+    //     image(videoFeed, 0, 0); 
+    // }
+
 }
 
 
 
+
 function cubeFilter(){
+
     videoFeed.loadPixels();
 
     let stepS = 5;
@@ -55,7 +81,6 @@ function cubeFilter(){
             let r = videoFeed.pixels[index];
             let g = videoFeed.pixels[index + 1];
             let b = videoFeed.pixels[index + 2];
-            let a = videoFeed.pixels[index + 3];
             fill(r + g + b / 30);
             rect(x, y, stepS, stepS);
             stroke(0);
@@ -68,6 +93,7 @@ function cubeFilter(){
 
 
 function colorFilter(){
+    
     videoFeed.loadPixels();
 
     let stepS = 4;
@@ -79,7 +105,6 @@ function colorFilter(){
             let r = videoFeed.pixels[index];
             let g = videoFeed.pixels[index + 1];
             let b = videoFeed.pixels[index + 2];
-            let a = videoFeed.pixels[index + 3];
             fill(r * 2, g * 1.75, b * 1.9);
             ellipse(x, y, stepS, stepS);
             stroke(0);
@@ -92,14 +117,14 @@ function colorFilter(){
 
 
 function takeSnap() {
-    videoFeed.get();
+    snap = c.get();
 }
 
 
 function savePic() {
     let rand = floor(random(1, 99999));
     let randS = str(rand);
-    saveCanvas(randS, 'jpg');
+    save(snap, randS);
 }
 
 

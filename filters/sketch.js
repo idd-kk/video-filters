@@ -35,37 +35,15 @@ function setup() {
 
 function draw() {
     // image(videoFeed, 0, 0);
-    cubeFilter;
     colorFilter;
+    cubeFilter;
     takeSnap;
     resetAll;
 }
 
 
+
 function cubeFilter(){
-    videoFeed.loadPixels();
-
-    let stepS = 7;
-
-    for (let  x = 0; x < videoFeed.width; x+= stepS) {
-        for (let y = 0; y < videoFeed.height; y+= stepS) {
- 
-            let index = ((y * videoFeed.width) + x) * 4;
-            let r = videoFeed.pixels[index];
-            let g = videoFeed.pixels[index + 1];
-            let b = videoFeed.pixels[index + 2];
-            let a = videoFeed.pixels[index + 3];
-            fill(r + g + b/3);
-            rect(x, y, stepS, stepS);
-            strokeWeight(3);
-        }
-    }
-    // videoFeed.updatePixels();
-    // image(videoFeed, 0, 0);
-}
-
-
-function colorFilter(){
     videoFeed.loadPixels();
 
     let stepS = 5;
@@ -78,9 +56,34 @@ function colorFilter(){
             let g = videoFeed.pixels[index + 1];
             let b = videoFeed.pixels[index + 2];
             let a = videoFeed.pixels[index + 3];
-            fill(r * 1.2, g, b);
+            fill(r + g + b / 30);
+            rect(x, y, stepS, stepS);
+            stroke(0);
+            strokeWeight(2);
+        }
+    }
+    // videoFeed.updatePixels();
+    // image(videoFeed, 0, 0);
+}
+
+
+function colorFilter(){
+    videoFeed.loadPixels();
+
+    let stepS = 4;
+
+    for (let  x = 0; x < videoFeed.width; x+= stepS) {
+        for (let y = 0; y < videoFeed.height; y+= stepS) {
+ 
+            let index = ((y * videoFeed.width) + x) * 4;
+            let r = videoFeed.pixels[index];
+            let g = videoFeed.pixels[index + 1];
+            let b = videoFeed.pixels[index + 2];
+            let a = videoFeed.pixels[index + 3];
+            fill(r * 2, g * 1.75, b * 1.9);
             ellipse(x, y, stepS, stepS);
-            strokeWeight(3);
+            stroke(0);
+            strokeWeight(1);
         }
     }
     // videoFeed.updatePixels();
@@ -106,3 +109,12 @@ function resetAll() {
 
 
 
+// if (colorFilter.mouseIsPressed == true) {
+//     colorFilter();
+//     }
+// else if (cubeFilter.mouseIsPressed == true) {
+//     cubeFilter();
+// } 
+// else {
+//    
+// }

@@ -17,7 +17,7 @@ function setup() {
     colorBtn = createImg('/filters/img/color-palette.svg');
     colorBtn.size(60, 50)
     colorBtn.position(170, 415);
-    colorBtn.mouseClicked(colorFilter); 
+    colorBtn.mousePressed(colorFilter); 
 
     cubeBtn = createImg('/filters/img/contrast.svg');
     cubeBtn.size(35, 35)
@@ -32,12 +32,12 @@ function setup() {
     saveBtn = createImg('/filters/img/floppy.svg');
     saveBtn.size(40, 40)
     saveBtn.position(365, 420);
-    saveBtn.mouseClicked(savePic); 
+    saveBtn.mousePressed(savePic); 
 
     resetBtn = createImg('/filters/img/reset.svg');
     resetBtn.size(40, 40)
     resetBtn.position(415, 420);
-    resetBtn.mouseClicked(resetAll); 
+    resetBtn.mousePressed(resetAll); 
 
     resetAll();
 } 
@@ -45,50 +45,39 @@ function setup() {
 
 function draw() {
     // image(videoFeed, 0, 0);
-    // colorFilter;
-    // cubeFilter;
+    // colorFilter();
+    // cubeFilter();
     // takeSnap();
    
 
 
-    // if (colorFilter.mousePressed == true) {
+    // if (colorFilter.mouseReleased == true) {
     //     image(videoFeed, 0, 0); 
     //     colorFilter();
     // }
-    // else if (cubeFilter.mousePressed == true) {
+    // else if (cubeFilter.mouseReleased == true) {
     //     image(videoFeed, 0, 0); 
     //     cubeFilter();
     // } 
     // else {
     //     image(videoFeed, 0, 0); 
     // }
-
 }
 
 
+function mousePressed() {
 
-
-function cubeFilter(){
-
-    videoFeed.loadPixels();
-
-    let stepS = 5;
-
-    for (let  x = 0; x < videoFeed.width; x+= stepS) {
-        for (let y = 0; y < videoFeed.height; y+= stepS) {
- 
-            let index = ((y * videoFeed.width) + x) * 4;
-            let r = videoFeed.pixels[index];
-            let g = videoFeed.pixels[index + 1];
-            let b = videoFeed.pixels[index + 2];
-            fill(r + g + b / 30);
-            rect(x, y, stepS, stepS);
-            stroke(0);
-            strokeWeight(2);
-        }
+    if (colorFilter.mousePressed == true) {
+        // image(videoFeed, 0, 0); 
+        colorFilter();
     }
-    // videoFeed.updatePixels();
-    // image(videoFeed, 0, 0);
+    else if (cubeFilter.mousePressed== true) {
+        // image(videoFeed, 0, 0); 
+        cubeFilter();
+    } 
+    else {
+        // image(videoFeed, 0, 0); 
+    }
 }
 
 
@@ -111,8 +100,29 @@ function colorFilter(){
             strokeWeight(1);
         }
     }
-    // videoFeed.updatePixels();
-    // image(videoFeed, 0, 0);
+}
+
+
+function cubeFilter(){
+
+    videoFeed.loadPixels();
+
+    let stepS = 5;
+
+    for (let  x = 0; x < videoFeed.width; x+= stepS) {
+        for (let y = 0; y < videoFeed.height; y+= stepS) {
+ 
+            let index = ((y * videoFeed.width) + x) * 4;
+            let r = videoFeed.pixels[index];
+            let g = videoFeed.pixels[index + 1];
+            let b = videoFeed.pixels[index + 2];
+            fill(r + g + b / 30);
+            rect(x, y, stepS, stepS);
+            stroke(0);
+            strokeWeight(2);
+        }
+    }
+
 }
 
 
@@ -133,13 +143,3 @@ function resetAll() {
 }
 
 
-
-// if (colorFilter.mouseIsPressed == true) {
-//     colorFilter();
-//     }
-// else if (cubeFilter.mouseIsPressed == true) {
-//     cubeFilter();
-// } 
-// else {
-//    
-// }
